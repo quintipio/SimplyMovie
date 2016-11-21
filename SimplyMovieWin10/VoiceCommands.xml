@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="fr" Name="SimplyMovie_CommandSet_fr">
+    <AppName>Simply Movie</AppName>
+    <Example>>Quels films sont à voir avec Simply Movie</Example>
+
+    <Command Name="showVoirFilm">
+      <Example>Quels films sont à voir avec Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">quels films sont à voir</ListenFor>
+      <Feedback>Je regarde ça... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilm">
+      <Example>Affiche des films à regarder Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >affiche des films à regarder</ListenFor>
+      <Feedback>Je regarde ça... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmFav">
+      <Example>Quels sont mes films favoris avec Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >quels sont mes films favoris</ListenFor>
+      <Feedback>Voyons ça... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showAcheter">
+      <Example>Quels sont les films à avoir avec Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >quels sont les films à avoir</ListenFor>
+      <Feedback>Je regarde ça... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmMoment">
+      <Example>Quels sont les films du moment avec Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >quels sont les films du moment</ListenFor>
+      <Feedback>Je recherche... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showSerieMoment">
+      <Example>Quels sont les séries du moment avec Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >quels sont les séries du moment</ListenFor>
+      <Feedback>Je recherche... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+  </CommandSet>
+
+
+
+  <CommandSet xml:lang="en" Name="SimplyMovie_CommandSet_en">
+    <AppName>Simply Movie</AppName>
+    <Example>>Displays movies to watch with Simply Movie</Example>
+
+    <Command Name="showVoirFilm">
+      <Example>What movies are to see with Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">what movies are to see</ListenFor>
+      <Feedback>I look at this... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilm">
+      <Example>Displays movies to watch with Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >displays movies to watch</ListenFor>
+      <Feedback>I look at this... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmFav">
+      <Example>What are my favorite movies with Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >what are my favorite movies</ListenFor>
+      <Feedback>See this... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showAcheter">
+      <Example>What are the movies to buy with Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >what are the movies to buy</ListenFor>
+      <Feedback>I look at this... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmMoment">
+      <Example>What are the movies of the moment with Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >what are the movies of the moment</ListenFor>
+      <Feedback>I am looking... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showSerieMoment">
+      <Example>What are the tv shows of the moment with Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >what are the tv shows of the moment</ListenFor>
+      <Feedback>I am looking... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+  </CommandSet>
+
+
+  <CommandSet xml:lang="es" Name="SimplyMovie_CommandSet_es">
+    <AppName>Simply Movie</AppName>
+    <Example>>Qué películas tienen que ver con Simply Movie</Example>
+
+    <Command Name="showVoirFilm">
+      <Example>Qué películas tienen que ver con Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">qué películas tienen que ver</ListenFor>
+      <Feedback>Miro esto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilm">
+      <Example>Muestra de películas para ver con Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >muestra de películas para ver</ListenFor>
+      <Feedback>Miro esto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmFav">
+      <Example>Cuáles son mis películas favoritas con Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >cuáles son mis películas favoritas</ListenFor>
+      <Feedback>Miro esto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showAcheter">
+      <Example>Cuáles son las películas que tengo que comprar con Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >cuáles son las películas que tengo que comprar</ListenFor>
+      <Feedback>Miro esto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmMoment">
+      <Example>Cuáles son las películas del momento con Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >cuáles son las películas del momento</ListenFor>
+      <Feedback>Miro esto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showSerieMoment">
+      <Example>Cuáles son las series del momento con Simply Movie</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase" >Cuáles son las series del momento</ListenFor>
+      <Feedback>Miro esto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+  </CommandSet>
+
+
+
+<CommandSet xml:lang="pt" Name="SimplyMovie_CommandSet_pt">
+    <AppName>Simply Movie</AppName>
+    <Example>>Que filmes estão a ver com o Simply Movie</Example>
+
+    <Command Name="showVoirFilm">
+      <Example>Simply movie, que filmes estão a ver</Example>
+      <ListenFor RequireAppName="BeforePhrase">que filmes estão a ver</ListenFor>
+      <Feedback>Eu vejo isto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilm">
+      <Example>Simply movie, exibe filmes para assistir</Example>
+      <ListenFor RequireAppName="BeforePhrase" >exibe filmes para assistir</ListenFor>
+      <Feedback>Eu vejo isto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmFav">
+      <Example>Simply movie, o que são meus filmes favoritos</Example>
+      <ListenFor RequireAppName="BeforePhrase" >o que são meus filmes favoritos</ListenFor>
+      <Feedback>Eu vejo isto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showAcheter">
+      <Example>Simply movie, quais são os filmes para comprar</Example>
+      <ListenFor RequireAppName="BeforePhrase" >quais são os filmes para comprar</ListenFor>
+      <Feedback>Eu vejo isto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showFilmMoment">
+      <Example>Simply movie, quais são os filmes do momento</Example>
+      <ListenFor RequireAppName="BeforePhrase" >quais são os filmes do momento</ListenFor>
+      <Feedback>Eu vejo isto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+    <Command Name="showSerieMoment">
+      <Example>Simply movie, o que são a tv mostra do momento</Example>
+      <ListenFor RequireAppName="BeforePhrase" >o que são a tv mostra do momento</ListenFor>
+      <Feedback>Eu vejo isto... </Feedback>
+      <VoiceCommandService Target="SimplyMovieService"/>
+    </Command>
+
+  </CommandSet>
+</VoiceCommands>

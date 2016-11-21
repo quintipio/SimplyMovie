@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcceuilContent.Content" xml:space="preserve">
+    <value>Página de inicio</value>
+  </data>
+  <data name="AcceuilText.Text" xml:space="preserve">
+    <value>Bienvenidos a Simply movie</value>
+  </data>
+  <data name="ActeursText.Text" xml:space="preserve">
+    <value>Actores:</value>
+  </data>
+  <data name="ActeurText.Text" xml:space="preserve">
+    <value>Actores:</value>
+  </data>
+  <data name="AfficheText.Text" xml:space="preserve">
+    <value>Cartel:</value>
+  </data>
+  <data name="AjouterFilmBiblioContent.Content" xml:space="preserve">
+    <value>Añadir esta película a mi biblioteca</value>
+  </data>
+  <data name="AjouterFilmText" xml:space="preserve">
+    <value>Nueva película </value>
+  </data>
+  <data name="AjouterSerieBiblioContent.Content" xml:space="preserve">
+    <value>Añadir esta serie a mi biblioteca</value>
+  </data>
+  <data name="AnneeText.Text" xml:space="preserve">
+    <value>Año:</value>
+  </data>
+  <data name="AnnulerDlg.PrimaryButtonText" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="AppdLabel.Label" xml:space="preserve">
+    <value>Con respecto a...</value>
+  </data>
+  <data name="AppdText.Text" xml:space="preserve">
+    <value>Con respecto a...</value>
+  </data>
+  <data name="AucunResultat" xml:space="preserve">
+    <value>Ningún resultado</value>
+  </data>
+  <data name="AutreText" xml:space="preserve">
+    <value>Otros:</value>
+  </data>
+  <data name="AvecText.Text" xml:space="preserve">
+    <value>Con:</value>
+  </data>
+  <data name="avert" xml:space="preserve">
+    <value>advertencia</value>
+  </data>
+  <data name="avertissementImport" xml:space="preserve">
+    <value>Atención, por la carga de los datos, todo lo que se guarda actualmente se borrará. ¿Desea continuar?</value>
+  </data>
+  <data name="AVoirEtNonPosseder.Content" xml:space="preserve">
+    <value>Ver y que no tienen</value>
+  </data>
+  <data name="AVoirPossederContent.Content" xml:space="preserve">
+    <value>En mi videoteca</value>
+  </data>
+  <data name="BiblioContent.Content" xml:space="preserve">
+    <value>Mi biblioteca </value>
+  </data>
+  <data name="BibliothequeText.Text" xml:space="preserve">
+    <value>Mi videoteca </value>
+  </data>
+  <data name="BluRayText" xml:space="preserve">
+    <value>Blu-Ray</value>
+  </data>
+  <data name="BugsLabel.Label" xml:space="preserve">
+    <value>Bugs, sugerencias</value>
+  </data>
+  <data name="CastText.Text" xml:space="preserve">
+    <value>Reparto:</value>
+  </data>
+  <data name="ChargerContent.Content" xml:space="preserve">
+    <value>Carga </value>
+  </data>
+  <data name="ChoixLangueText.Text" xml:space="preserve">
+    <value>Seleccione el idioma: </value>
+  </data>
+  <data name="confirmSupFilm" xml:space="preserve">
+    <value>¿Está seguro que desea eliminar esta película? </value>
+  </data>
+  <data name="ConsulterBiblioContent.Content" xml:space="preserve">
+    <value>Consultar en mi biblioteca </value>
+  </data>
+  <data name="ConsulterInternetContent.Content" xml:space="preserve">
+    <value>Consulte la completa </value>
+  </data>
+  <data name="contentAutre.Content" xml:space="preserve">
+    <value>Otros</value>
+  </data>
+  <data name="contentBluRay.Content" xml:space="preserve">
+    <value>Blu-Ray</value>
+  </data>
+  <data name="contentDvd.Content" xml:space="preserve">
+    <value>DVD </value>
+  </data>
+  <data name="contentFichier.Content" xml:space="preserve">
+    <value>Archivo </value>
+  </data>
+  <data name="contentFilm.Content" xml:space="preserve">
+    <value>Película </value>
+  </data>
+  <data name="contentPosseder.Content" xml:space="preserve">
+    <value>Yo lo tengo </value>
+  </data>
+  <data name="contentSerie.Content" xml:space="preserve">
+    <value>Serie</value>
+  </data>
+  <data name="contentSouhait.Content" xml:space="preserve">
+    <value>Gustaría tener </value>
+  </data>
+  <data name="contentSouhaitVoir.Content" xml:space="preserve">
+    <value>Me gustaría verlo </value>
+  </data>
+  <data name="contentVu.Content" xml:space="preserve">
+    <value>Lo vi! </value>
+  </data>
+  <data name="contentWeb.Content" xml:space="preserve">
+    <value>Enlace de Internet </value>
+  </data>
+  <data name="CortanaText.Text" xml:space="preserve">
+    <value>Cortana (beta) :</value>
+  </data>
+  <data name="CoutText.Text" xml:space="preserve">
+    <value>Costos de producción: </value>
+  </data>
+  <data name="CrewText.Text" xml:space="preserve">
+    <value>Equipo técnico: </value>
+  </data>
+  <data name="DateSortieText.Text" xml:space="preserve">
+    <value>Fecha de lanzamiento: </value>
+  </data>
+  <data name="DatesText.Text" xml:space="preserve">
+    <value>Fechas: </value>
+  </data>
+  <data name="DeveloppeurText.Text" xml:space="preserve">
+    <value>Desarrollador </value>
+  </data>
+  <data name="DlgShowFilm.PrimaryButtonText" xml:space="preserve">
+    <value>Cerrar </value>
+  </data>
+  <data name="DureeText.Text" xml:space="preserve">
+    <value>Duración (en minutos): </value>
+  </data>
+  <data name="DvdText" xml:space="preserve">
+    <value>DVD </value>
+  </data>
+  <data name="EpisodeText.Text" xml:space="preserve">
+    <value>Episodios: </value>
+  </data>
+  <data name="EquipeTechniqueText.Text" xml:space="preserve">
+    <value>Miembro del equipo técnico: </value>
+  </data>
+  <data name="erreurAucuneImage" xml:space="preserve">
+    <value>Ninguna imagen para cargar</value>
+  </data>
+  <data name="erreurFormatAnnee" xml:space="preserve">
+    <value>El año debe ser un número </value>
+  </data>
+  <data name="erreurInternet" xml:space="preserve">
+    <value>Error al recuperar información de internet </value>
+  </data>
+  <data name="erreurPoidImage" xml:space="preserve">
+    <value>La imagen debe ser menor que el peso </value>
+  </data>
+  <data name="erreurSizeImage" xml:space="preserve">
+    <value>El tamaño de la imagen debe ser por lo menos </value>
+  </data>
+  <data name="erreurTitreVide" xml:space="preserve">
+    <value>El campo de título no debe estar vacío </value>
+  </data>
+  <data name="errExport" xml:space="preserve">
+    <value>Error al exportar </value>
+  </data>
+  <data name="errImport" xml:space="preserve">
+    <value>Error durante la importación </value>
+  </data>
+  <data name="ExporterLabel.Label" xml:space="preserve">
+    <value>De la exportación </value>
+  </data>
+  <data name="exportOk" xml:space="preserve">
+    <value>Exportación completada </value>
+  </data>
+  <data name="FilmAjoute" xml:space="preserve">
+    <value>Película agregada! </value>
+  </data>
+  <data name="FilmAPossederText.Text" xml:space="preserve">
+    <value>Una compra</value>
+  </data>
+  <data name="FilmAVoirText.Text" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="FilmFavorisText.Text" xml:space="preserve">
+    <value>Mis Favoritos </value>
+  </data>
+  <data name="FilmModif" xml:space="preserve">
+    <value>Modificado película! </value>
+  </data>
+  <data name="FilmMomentText.Text" xml:space="preserve">
+    <value>Películas del momento </value>
+  </data>
+  <data name="FilmPopulaireText.Text" xml:space="preserve">
+    <value>Películas populares </value>
+  </data>
+  <data name="FilmSimilaireText.Text" xml:space="preserve">
+    <value>Similar:</value>
+  </data>
+  <data name="FilmsText.Text" xml:space="preserve">
+    <value>Películas </value>
+  </data>
+  <data name="GenreText.Text" xml:space="preserve">
+    <value>Géneros: </value>
+  </data>
+  <data name="importOk" xml:space="preserve">
+    <value>Importación completado </value>
+  </data>
+  <data name="JeLaiAcheterContent.Content" xml:space="preserve">
+    <value>Yo lo tengo! </value>
+  </data>
+  <data name="JeLaiVuContent.Content" xml:space="preserve">
+    <value>Lo vi! </value>
+  </data>
+  <data name="LieuNaissanceText.Text" xml:space="preserve">
+    <value>Lugar de nacimiento: </value>
+  </data>
+  <data name="LinkContent.Content" xml:space="preserve">
+    <value>Enlace </value>
+  </data>
+  <data name="MaNoteText.Text" xml:space="preserve">
+    <value>Mi Nota: </value>
+  </data>
+  <data name="MenuContent.Content" xml:space="preserve">
+    <value>Menú </value>
+  </data>
+  <data name="ModifierFilmText" xml:space="preserve">
+    <value>Editar una película </value>
+  </data>
+  <data name="NombreEpisodeText.Text" xml:space="preserve">
+    <value>Número de episodios: </value>
+  </data>
+  <data name="NombreSaisonText.Text" xml:space="preserve">
+    <value>Número de temporadas: </value>
+  </data>
+  <data name="NonPossederContent.Content" xml:space="preserve">
+    <value>Los que no lo hice </value>
+  </data>
+  <data name="NoteDuFilmText.Text" xml:space="preserve">
+    <value>Nota general: </value>
+  </data>
+  <data name="NouveauFilmText.Text" xml:space="preserve">
+    <value>Nuevo </value>
+  </data>
+  <data name="NouveauLabel.Label" xml:space="preserve">
+    <value>Nuevo </value>
+  </data>
+  <data name="NouveauteesContenu.Text" xml:space="preserve">
+    <value>Versión 1.2:
+-Corrección de errores.
+-Cambio de la clasificación y la exhibición en la biblioteca.
+-A las herramientas para cualquier añadido una carpeta de películas.
+-Añadida gestión de colecciones de películas.
+-Añadido la demostración documental y animación.
+
+Versión 1.1: 
+
+-Creación de la aplicación</value>
+  </data>
+  <data name="NouveauteesText.Text" xml:space="preserve">
+    <value>Noticias: </value>
+  </data>
+  <data name="OrigineText.Text" xml:space="preserve">
+    <value>Origen: </value>
+  </data>
+  <data name="ParametresContent.Content" xml:space="preserve">
+    <value>Parámetros </value>
+  </data>
+  <data name="ParametreText.Text" xml:space="preserve">
+    <value>Parámetros </value>
+  </data>
+  <data name="PersonnesText.Text" xml:space="preserve">
+    <value>Personas </value>
+  </data>
+  <data name="phraseAnnuler" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="PhraseCortanaText.Text" xml:space="preserve">
+    <value>¿Qué películas tienen que ver con Simply Movie?
+
+¿Muestra de películas para ver  con Simply Movie? 
+
+¿Cuáles son mis películas favoritas  con Simply Movie? 
+
+¿Cuáles son las películas que tengo que comprar  con Simply Movie? 
+
+¿Cuáles son las películas del momento con Simply Movie? 
+
+¿Cuáles son las series del momento  con Simply Movie?</value>
+  </data>
+  <data name="phraseNon" xml:space="preserve">
+    <value>No </value>
+  </data>
+  <data name="phraseOK" xml:space="preserve">
+    <value>Vale </value>
+  </data>
+  <data name="phraseOui" xml:space="preserve">
+    <value>Sí </value>
+  </data>
+  <data name="PlusResultatContent.Content" xml:space="preserve">
+    <value>Más resultado</value>
+  </data>
+  <data name="PolitiqueConf.Text" xml:space="preserve">
+    <value>Esta aplicación no recopila ninguna información personal que pudiera identificarle. Toda la información se rellenan explícitamente por el usuario durante el uso de la aplicación. Ninguna de esta información es transmitida a los servidores de terceros, hechos público o compartido en internet. Toda la información recogida se almacena en su pc en el directorio privado. Conexión a Internet es requerida por la aplicación sólo para enviar consultas para buscar películas, series o personas http://api.themoviedb.org/3/.
+Si usted tiene preguntas sobre la política de privacidad, usted puede enviar un mensaje al correo qdelfour@gmail.com.</value>
+  </data>
+  <data name="PolitiqueConfText.Text" xml:space="preserve">
+    <value>Política de privacidad </value>
+  </data>
+  <data name="PossederContent.Content" xml:space="preserve">
+    <value>Los que tengo </value>
+  </data>
+  <data name="PossederText" xml:space="preserve">
+    <value>Yo lo tengo </value>
+  </data>
+  <data name="ProducteursText.Text" xml:space="preserve">
+    <value>Productores: </value>
+  </data>
+  <data name="RateLabel.Label" xml:space="preserve">
+    <value>Nota la aplicación! </value>
+  </data>
+  <data name="RealisateursText.Text" xml:space="preserve">
+    <value>Directores:</value>
+  </data>
+  <data name="RecetteText.Text" xml:space="preserve">
+    <value>Receta:</value>
+  </data>
+  <data name="RedemarrageRequisText.Text" xml:space="preserve">
+    <value>Un reinicio es necesario para tener plenamente en cuenta el cambio de idioma</value>
+  </data>
+  <data name="restaurerDataContent.Content" xml:space="preserve">
+    <value>Restaurar los datos</value>
+  </data>
+  <data name="saisonText.Text" xml:space="preserve">
+    <value>Temporada:</value>
+  </data>
+  <data name="sauvegarderDataContent.Content" xml:space="preserve">
+    <value>Respaldo de datos</value>
+  </data>
+  <data name="saveRestoreText.Text" xml:space="preserve">
+    <value>Guardar / restaurar</value>
+  </data>
+  <data name="SeriesText.Text" xml:space="preserve">
+    <value>Serie</value>
+  </data>
+  <data name="SouhaitAvoirText" xml:space="preserve">
+    <value>Gustaría tener </value>
+  </data>
+  <data name="SouhaitVoirText" xml:space="preserve">
+    <value>Me gustaría verlo </value>
+  </data>
+  <data name="SuggestionsText.Text" xml:space="preserve">
+    <value>Algunas sugerencias...</value>
+  </data>
+  <data name="SynopsisText.Text" xml:space="preserve">
+    <value>Sinopsis:</value>
+  </data>
+  <data name="textFR" xml:space="preserve">
+    <value>Francés </value>
+  </data>
+  <data name="TheMovieDbText.Text" xml:space="preserve">
+    <value>Base de datos de películas:</value>
+  </data>
+  <data name="TitreOriginalText.Text" xml:space="preserve">
+    <value>Título original:</value>
+  </data>
+  <data name="TitreText.Text" xml:space="preserve">
+    <value>Título:</value>
+  </data>
+  <data name="TmbdConditions.Text" xml:space="preserve">
+    <value>Esta aplicación utiliza la API de la base de datos de película pero no es la aplicación oficial y no está certificada por TMDB</value>
+  </data>
+  <data name="TousContent.Content" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="TvMomentText.Text" xml:space="preserve">
+    <value>Serie del momento</value>
+  </data>
+  <data name="TvPopularText.Text" xml:space="preserve">
+    <value>Popular serie</value>
+  </data>
+  <data name="ValiderContent.Content" xml:space="preserve">
+    <value>Validar</value>
+  </data>
+  <data name="VersionText.Text" xml:space="preserve">
+    <value>Versión</value>
+  </data>
+  <data name="VoirPlusContent.Content" xml:space="preserve">
+    <value>Ver más </value>
+  </data>
+  <data name="VuText" xml:space="preserve">
+    <value>Lo vi! </value>
+  </data>
+  <data name="textEN" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="textES" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="textPT" xml:space="preserve">
+    <value>Portugués</value>
+  </data>
+  <data name="Mesfilms.Content" xml:space="preserve">
+    <value>Mis películas</value>
+  </data>
+  <data name="MesSeries.Content" xml:space="preserve">
+    <value>Mi serie</value>
+  </data>
+  <data name="FilmDejaLieText.Text" xml:space="preserve">
+    <value>Esta película está vinculada a uno o más de otras películas:</value>
+  </data>
+  <data name="LieCollectionText.Text" xml:space="preserve">
+    <value>Enlazar esta película a una colección:</value>
+  </data>
+  <data name="NumeroCollectionText.Text" xml:space="preserve">
+    <value>Número en la colección:</value>
+  </data>
+  <data name="SupFilmCollectionContent.Content" xml:space="preserve">
+    <value>Borrar esta película de la colección</value>
+  </data>
+  <data name="contentDessinAnime.Content" xml:space="preserve">
+    <value>Dibujos de anime</value>
+  </data>
+  <data name="contentDocumentaire.Content" xml:space="preserve">
+    <value>Documentales</value>
+  </data>
+  <data name="contentSpectacle.Content" xml:space="preserve">
+    <value>Espectáculos y conciertos</value>
+  </data>
+  <data name="MesCollections.Content" xml:space="preserve">
+    <value>Mis colecciones</value>
+  </data>
+  <data name="MesDessinsAnimes.Content" xml:space="preserve">
+    <value>Mis viñetas</value>
+  </data>
+  <data name="MesDocumentaires.Content" xml:space="preserve">
+    <value>Mis documentales</value>
+  </data>
+  <data name="MesSpectacles.Content" xml:space="preserve">
+    <value>Mis espectáculos y conciertos</value>
+  </data>
+  <data name="majProgress.Text" xml:space="preserve">
+    <value>Actualización de sus datos actuales tras una actualización de la aplicación. Esto puede llevar unos minutos, especialmente si usted tiene un montón de películas...</value>
+  </data>
+  <data name="ImportMassContent.Content" xml:space="preserve">
+    <value>Importar desde una carpeta</value>
+  </data>
+  <data name="ImportMassText.Text" xml:space="preserve">
+    <value>Importar desde una carpeta</value>
+  </data>
+  <data name="AucunRes" xml:space="preserve">
+    <value>No hay resultados</value>
+  </data>
+  <data name="errFilmNoOk" xml:space="preserve">
+    <value>Todas las películas no están listas para ser importados</value>
+  </data>
+  <data name="PlusieursRes" xml:space="preserve">
+    <value>Varios resultados</value>
+  </data>
+  <data name="AjoutCollectionText.Text" xml:space="preserve">
+    <value>Para agregar esta película a una colección, especifique el nombre de la colección a la que desea vincular la película.</value>
+  </data>
+</root>

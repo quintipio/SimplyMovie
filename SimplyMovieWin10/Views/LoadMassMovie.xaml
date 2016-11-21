@@ -1,0 +1,111 @@
+﻿<Page
+    x:Class="SimplyMovieWin10.Views.LoadMassMovie"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimplyMovieWin10.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:SimplyMovieWin10.Converter"
+    xmlns:model="using:SimplyMovieWin10Shared.Model"
+    xmlns:ratingControl="using:JISoft.RatingControl"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converter:BoolVisibilityConverter x:Key="BoolVisibiltyConverter"/>
+        <converter:BoolVisibilityInvertConverter x:Key="BoolVisibiltyInvertConverter"/>
+        <DataTemplate x:Key="MovieData" x:DataType="model:MassLoad">
+            <Grid Margin="7" Background="{Binding Color,Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <AppBarButton Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Icon="Find" Visibility="{Binding IsOk,Mode=OneWay,Converter={StaticResource BoolVisibiltyInvertConverter}}" Tag="{Binding Id}" Click="FindMovie_Click" Width="50" Height="50" IsCompact="True"/>
+                <AppBarButton Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Icon="Delete" Tag="{Binding Id}" Click="DeleteMovie_Click" Width="50" Height="50" IsCompact="True"/>
+
+                <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <RadioButton x:Name="FilmRadioButton" x:Uid="contentFilm" Content="Film..." IsChecked="{Binding IsFilmSelected,Mode=TwoWay}" Tag="{Binding Id}"/>
+                    <RadioButton x:Name="DocuRadioButton" x:Uid="contentDocumentaire" IsChecked="{Binding IsDocuSelected,Mode=TwoWay}" Content="Documentaire..." Tag="{Binding Id}"/>
+                    <RadioButton x:Name="DessAnnRadioButton" x:Uid="contentDessinAnime" IsChecked="{Binding IsAnimSelected,Mode=TwoWay}" Content="Dessin animé..." Tag="{Binding Id}"/>
+                    <RadioButton x:Name="SpectacleRadioButton" x:Uid="contentSpectacle" IsChecked="{Binding IsSpecSelected,Mode=TwoWay}" Content="Spectacle et Concert..." Tag="{Binding Id}" />
+                </StackPanel>
+                
+                <ratingControl:Rating HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" AllowSelectingZero="True" RatingItemCount="5" Value="{Binding MaNote, Mode=TwoWay}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Margin="10,0,0,0">
+                    <ratingControl:Rating.FilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Goldenrod"/>
+                            <Setter Property="Width" Value="20"/>
+                            <Setter Property="Height" Value="20"/>
+                        </Style>
+                    </ratingControl:Rating.FilledItemStyle>
+                    <ratingControl:Rating.UnfilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Black"/>
+                            <Setter Property="Width" Value="20"/>
+                            <Setter Property="Height" Value="20"/>
+                        </Style>
+                    </ratingControl:Rating.UnfilledItemStyle>
+                </ratingControl:Rating>
+
+                <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Name,Mode=TwoWay}" VerticalAlignment="Top" IsReadOnly="{Binding IsOk}" TextChanged="TextBox_OnTextChanged"/>
+                <TextBlock Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Text="{Binding Path,Mode=OneWay}"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text=" => "/>
+                <TextBlock Grid.Row="0" Grid.Column="6" Text="{Binding Resultat,Mode=OneWay}"/>
+
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+        <Grid>
+        <Grid Background="#FFE8E8E8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitreGrid" Grid.Row="0" Background="Black">
+                <TextBlock x:Name="InfoTitreText" Text="Import de masse" x:Uid="ImportMassText" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="WhiteSmoke"/>
+            </Grid>
+            
+            <ProgressRing Grid.Row="1" IsActive="True" IsEnabled="True" Visibility="{x:Bind ViewModel.IsLoaded,Mode=OneWay,Converter={StaticResource BoolVisibiltyInvertConverter}}"/>
+            <ScrollViewer Grid.Row="1" Visibility="{x:Bind ViewModel.IsLoaded,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
+                <ListView  ItemsSource="{x:Bind ViewModel.ListeData,Mode=OneWay}" MinWidth="400" MinHeight="350" Margin="0,0,0,20" ItemTemplate="{StaticResource MovieData}" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </ScrollViewer>
+
+
+            <Button Grid.Row="2" x:Name="ValiderButton" x:Uid="ValiderContent" Click="Valider_Click" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.IsLoaded,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+         </Grid>
+
+        <ContentDialog x:Name ="DlgChoixFilm" VerticalAlignment="Center" x:Uid="AnnulerDlg" PrimaryButtonClick="OnClickAnnulerDlg" d:IsHidden="True">
+            <ListView ItemsSource="{x:Bind ViewModel.ListeFilmDlg,Mode=OneWay}" ItemClick="SelectFilmDlg" IsItemClickEnabled="True" MaxHeight="250" SelectionMode="None" IsSwipeEnabled="true" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Width="75" Height="100" Source="{Binding affiche}" Stretch="UniformToFill"/>
+                            <TextBlock Grid.Column="1" Text="{Binding title}" VerticalAlignment="Center" Margin="45,0" TextWrapping="Wrap"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ContentDialog>
+
+    </Grid>
+    
+</Page>

@@ -1,0 +1,282 @@
+﻿<Page
+    x:Class="SimplyMovieWin10.Views.ConsulterFilmView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimplyMovieWin10.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:SimplyMovieWin10.Converter"
+    xmlns:ratingControl="using:JISoft.RatingControl"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converter:BoolVisibilityConverter x:Key="BoolVisibiltyConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid Background="#FFE8E8E8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitreGrid" Grid.Row="0" Background="Black">
+                <TextBlock x:Name="InfoTitreText" Text="{x:Bind ViewModel.FilmAffiche.Titre,Mode=OneWay}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="15,0,0,0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="ms-appx:///Rsc/icon.png" Stretch="None" Opacity="0.15" />
+                </Grid.Background>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <RelativePanel>
+                        <Grid x:Name="GridAffiche" >
+                            <Image Source="{x:Bind ViewModel.FilmAffiche.AfficheImage, Mode=OneWay}" Width="100" Height="200"/>
+                        </Grid>
+                        <Grid x:Name="MainInfo" RelativePanel.RightOf="GridAffiche" Margin="10,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                                <TextBlock x:Uid="NoteDuFilmText" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                <ratingControl:Rating HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" AllowSelectingZero="True" RatingItemCount="5" Value="{x:Bind ViewModel.FilmAffiche.NoteGen,Mode=OneWay}" ReadOnly="True">
+
+                                    <ratingControl:Rating.FilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Goldenrod"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.FilledItemStyle>
+                                    <ratingControl:Rating.UnfilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.UnfilledItemStyle>
+                                </ratingControl:Rating>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" >
+                                <TextBlock x:Uid="MaNoteText" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                <ratingControl:Rating HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" AllowSelectingZero="True" RatingItemCount="5" Value="{x:Bind ViewModel.FilmAffiche.MaNote,Mode=OneWay}" ReadOnly="True">
+                                    <ratingControl:Rating.FilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Goldenrod"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.FilledItemStyle>
+                                    <ratingControl:Rating.UnfilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.UnfilledItemStyle>
+                                </ratingControl:Rating>
+                            </StackPanel>
+
+                            <StackPanel x:Name="SaisonStack" Orientation="Horizontal" Grid.Row="2" >
+                                <TextBlock x:Uid="saisonText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.FilmAffiche.Saison,Mode=OneWay}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                                <TextBlock x:Uid="DureeText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.FilmAffiche.Duree,Mode=OneWay}"/>
+                            </StackPanel>
+
+                            <ListView Grid.Row="4" ItemsSource="{x:Bind ViewModel.FilmAffiche.Genres, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <HyperlinkButton Content="{Binding Nom,Mode=OneWay}" Margin="0,0,4,0" Tag="{Binding}" Click="OpenGenre_Click"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+
+                        <Grid x:Name="InfoFilm" RelativePanel.Below="GridAffiche" RelativePanel.AlignLeftWith="GridAffiche" Margin="10,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,7,0,0">
+                                <TextBlock x:Uid="AvecText" VerticalAlignment="Center"/>
+                                <ListView ItemsSource="{x:Bind ViewModel.FilmAffiche.Acteurs, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Top" />
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <HyperlinkButton Content="{Binding Nom,Mode=OneWay}" Margin="0,0,4,0" Tag="{Binding}" Click="OpenPersonne_Click"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                                <TextBlock x:Uid="ProducteursText"  VerticalAlignment="Center"/>
+                                <ListView ItemsSource="{x:Bind ViewModel.FilmAffiche.Producteurs, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Top" />
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <HyperlinkButton Content="{Binding Nom,Mode=OneWay}" Margin="0,0,4,0" Tag="{Binding}" Click="OpenPersonne_Click"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock x:Uid="RealisateursText"  VerticalAlignment="Center"/>
+                                <ListView ItemsSource="{x:Bind ViewModel.FilmAffiche.Realisateurs, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Top" />
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <HyperlinkButton Content="{Binding Nom,Mode=OneWay}" Margin="0,0,4,0" Tag="{Binding}" Click="OpenPersonne_Click"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                <Button x:Uid="ConsulterInternetContent" Visibility="{x:Bind ViewModel.ConsulterInternetVisible,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" Click="OuvrirFicheInternet"/>
+                                <AppBarButton  HorizontalAlignment="Right" VerticalAlignment="Center" IsCompact="True" Width="40" Height="40" Icon="Edit" Click="Edit_Click"/>
+                                <AppBarButton  HorizontalAlignment="Right" VerticalAlignment="Center" IsCompact="True" Width="40" Height="40" Icon="Delete" Click="Delete_Click"/>
+
+                            </StackPanel>
+                            
+                            <TextBlock Grid.Row="4" Text="{x:Bind ViewModel.FilmAffiche.Synopsis,Mode=OneWay}" MaxWidth="350" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                        </Grid>
+
+                        <Grid x:Name="InforPerso" RelativePanel.Below="InfoFilm" Margin="15" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image Width="50" Height="50" x:Name="SeeImage" Source="../Rsc/eye.png" Grid.Row="0" Grid.Column="0" Visibility="Collapsed"/>
+                            <Image Width="50" Height="50" x:Name="HaveImage" Source="../Rsc/buy.png" Grid.Row="1" Grid.Column="0" Visibility="Collapsed"/>
+                            <TextBlock x:Name="SeeText" Grid.Row="0" Grid.Column="1" />
+                            <TextBlock x:Name="HaveText" Grid.Row="1" Grid.Column="1" />
+                            <HyperlinkButton x:Name="LinkWeb" x:Uid="LinkContent" Visibility="Collapsed" Grid.Row="1" Grid.Column="1" Click ="OuvrirLien"/>
+                            <Button x:Name="ButtonVu"  Grid.Row="0" Grid.Column="2" x:Uid="JeLaiVuContent" Click="Vu_Click" Margin="7,0,0,0" Visibility="Collapsed"/>
+                            <Button x:Name="ButtonAcheter"  Grid.Row="1" Grid.Column="2" x:Uid="JeLaiAcheterContent" Click="Acheter_Click" Margin="7,0,0,0" Visibility="Collapsed"/>
+
+                        </Grid>
+
+                        <StackPanel x:Name="FilmCollection" RelativePanel.Below="InforPerso" Margin="0,15,0,0" Height="400" Visibility="{x:Bind ViewModel.FilmCollectionVisible, Converter={StaticResource BoolVisibiltyConverter},Mode=OneWay}">
+                            <TextBlock Text="{x:Bind ViewModel.TitreCollection,Mode=OneWay}"  Margin="8,0,0,0"/>
+                            <GridView ItemsSource="{x:Bind ViewModel.FilmCollection,Mode=OneWay}" ItemClick="ChoixFilmCollection" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate >
+                                        <Grid Margin="2">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Source="{Binding AfficheImage}" Grid.Row="0" Width="100" Height="150" Opacity="{Binding Opacity}"/>
+                                            <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Titre}" Width="100" FontFamily="Cambria" FontSize="9"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+
+                        <StackPanel x:Name="FilmSimilaire" RelativePanel.Below="FilmCollection" Margin="0,15,0,0" Height="400" Visibility="{x:Bind ViewModel.FilmSimilaireVisible, Converter={StaticResource BoolVisibiltyConverter},Mode=OneWay}">
+                            <TextBlock x:Uid="FilmSimilaireText" Margin="8,0,0,0"/>
+                            <GridView ItemsSource="{x:Bind ViewModel.FilmSimilaire,Mode=OneWay}" ItemClick="ChoixFilmSimilaire" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate >
+                                        <Grid Margin="2">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Source="{Binding AfficheImage}" Grid.Row="0" Width="100" Height="150" Opacity="{Binding Opacity}"/>
+                                            <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Titre}" Width="100" FontFamily="Cambria" FontSize="9"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+
+                        
+                    </RelativePanel>
+                </ScrollViewer>
+
+            </Grid>
+
+            
+        </Grid>
+     </Grid>
+
+</Page>

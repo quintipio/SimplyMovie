@@ -1,0 +1,159 @@
+﻿<Page
+    x:Class="SimplyMovieWin10.Views.BibliothequeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimplyMovieWin10.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ratingControl="using:JISoft.RatingControl"
+    xmlns:converter="using:SimplyMovieWin10.Converter"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converter:BoolVisibilityConverter x:Key="BoolVisibiltyConverter"/>
+    </Page.Resources>
+        <Grid>
+        <Grid Background="#FFE8E8E8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitreGrid" Grid.Row="0" Background="Black">
+                <TextBlock x:Name="InfoTitreText" Text="Ma vidéothèque..." x:Uid="BibliothequeText" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="WhiteSmoke"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="ms-appx:///Rsc/icon.png" Stretch="None" Opacity="0.15" />
+                </Grid.Background>
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <AppBarButton x:Name="NewFilmButton" Grid.Column="0" Icon="Add" Click="AjouterFilm_Click" Foreground="Black" x:Uid="NouveauLabel"  HorizontalAlignment="Left"/>
+                    <HyperlinkButton x:Uid="ImportMassContent" Grid.Column="1" HorizontalAlignment="Left" Click="ImportPass_Click" Margin="10,0,0,0"/>
+                    <AppBarButton x:Name="ExportButton" Grid.Column="2" Icon="Page" Click="Exporter_Click" Foreground="Black" x:Uid="ExporterLabel" HorizontalAlignment="Right"/>
+                </Grid>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" x:Name="GridLink">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <HyperlinkButton x:Name="HyperlinkButtonAll" Margin="7" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Uid="TousContent" Click="TrierBiblio_Click" Tag="1"/>
+                        <StackPanel  Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                            <HyperlinkButton x:Name="HyperlinkButtonPossess" Margin="7" x:Uid="PossederContent" Click="TrierBiblio_Click" Tag="2" />
+                            <HyperlinkButton x:Name="HyperlinkButtonNoPossess" Margin="7" x:Uid="NonPossederContent" Click="TrierBiblio_Click" Tag="3"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonToSeePossess" Margin="7" x:Uid="AVoirPossederContent" Click="TrierBiblio_Click" Tag="4"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonToSeeNoPOssess" Margin="7" x:Uid="AVoirEtNonPosseder" Click="TrierBiblio_Click" Tag="5"/>
+                        </StackPanel>
+                        <StackPanel  Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <HyperlinkButton x:Name="HyperlinkButtonCollection" Margin="7" x:Uid="MesCollections" Click="TrierBiblio_Click" Tag="10"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonFilms" Margin="7" x:Uid="Mesfilms" Click="TrierBiblio_Click" Tag="11"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonSeries" Margin="7" x:Uid="MesSeries" Click="TrierBiblio_Click" Tag="12"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonDocu" Margin="7" x:Uid="MesDocumentaires" Click="TrierBiblio_Click" Tag="13"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonAnim" Margin="7" x:Uid="MesDessinsAnimes" Click="TrierBiblio_Click" Tag="14"/>
+                            <HyperlinkButton x:Name="HyperlinkButtonSpectacles" Margin="7" x:Uid="MesSpectacles" Click="TrierBiblio_Click" Tag="15"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+                
+                <ProgressRing Grid.Row="2" x:Name="WaitRing" />
+                
+                <Grid Grid.Row="3" Visibility="{x:Bind ViewModel.VisibleGridNextBack,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" MaxWidth="350">
+                    <AppBarButton IsCompact="True" Icon="Previous" IsEnabled="{x:Bind ViewModel.EnableBack,Mode=OneWay}" Click="BackClick"/>
+                    <AppBarButton IsCompact="True" Icon="Next" IsEnabled="{x:Bind ViewModel.EnableNext,Mode=OneWay}" Click="NextClick" HorizontalAlignment="Right"/>
+                </Grid>
+
+                <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
+                <ListView  ItemsSource="{x:Bind ViewModel.ListeFilms, Mode=OneWay}" MinWidth="400" Margin="0,0,0,20">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <!--<ColumnDefinition Width="*"/>-->
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                                    <AppBarButton IsCompact="True" Width="40" Height="40" Icon="View" Tag="{Binding}" Click="View_Click"/>
+                                    <AppBarButton IsCompact="True" Width="40" Height="40" Icon="Edit" Tag="{Binding}" Click="Edit_Click"/>
+                                    <AppBarButton IsCompact="True" Width="40" Height="40" Icon="Delete" Tag="{Binding}" Click="Delete_Click"/>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="1" Text="{Binding NomCollection}"  VerticalAlignment="Center" Margin="8,0" TextWrapping="Wrap" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Titre}"  VerticalAlignment="Center" Margin="8,0" TextWrapping="Wrap"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Annee}" VerticalAlignment="Center" Margin="8,0"/>
+
+                                <ratingControl:Rating HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" AllowSelectingZero="True" RatingItemCount="5" Value="{Binding MaNote}" Grid.Column="4" Margin="8,0" ReadOnly="True">
+                                    <ratingControl:Rating.FilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Goldenrod"/>
+                                            <Setter Property="Width" Value="20"/>
+                                            <Setter Property="Height" Value="20"/>
+                                        </Style>
+                                    </ratingControl:Rating.FilledItemStyle>
+                                    <ratingControl:Rating.UnfilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Width" Value="20"/>
+                                            <Setter Property="Height" Value="20"/>
+                                        </Style>
+                                    </ratingControl:Rating.UnfilledItemStyle>
+                                </ratingControl:Rating>
+                                <!--
+                                        <ListView Grid.Column="4" ItemsSource="{Binding Genres, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Top" />
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+
+                                            <ListView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                                </ItemsPanelTemplate>
+                                            </ListView.ItemsPanel>
+
+
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <HyperlinkButton Content="{Binding Nom}" Margin="0,0,4,0" Tag="{Binding}" Click="ClickGenre" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>-->
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

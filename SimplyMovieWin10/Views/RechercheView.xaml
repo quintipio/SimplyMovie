@@ -1,0 +1,113 @@
+﻿<Page
+    x:Class="SimplyMovieWin10.Views.RechercheView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimplyMovieWin10.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:SimplyMovieWin10Shared.Model"
+    xmlns:converter="using:SimplyMovieWin10.Converter"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converter:BoolVisibilityConverter x:Key="BoolVisibiltyConverter"/>
+    </Page.Resources>
+
+    
+    <Grid>
+        <Grid  Background="#FFE8E8E8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitreGrid" Grid.Row="0" Background="Black">
+                <TextBlock Text="{x:Bind ViewModel.Titre,Mode=OneWay}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.Background>
+                    <ImageBrush ImageSource="ms-appx:///Rsc/icon.png" Stretch="None" Opacity="0.15" />
+                </Grid.Background>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <AutoSuggestBox x:Name="SearchBoxTitle" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,10,0,10" Width="280" QuerySubmitted="SearchBoxTitle_OnQuerySubmitted"   />
+                                <AppBarButton Grid.Column="1" Icon="Find" Foreground="Black" IsCompact="True" Click="AppBarButton_Click" />
+                                <ProgressRing Grid.Column="2"  x:Name="RingWait"/>
+                            </Grid>
+
+                        </StackPanel>
+                        <TextBlock x:Name="ErrorTextBlock" Margin="50,4,0,10" Foreground="DarkRed"/>
+                        <Button x:Uid="PlusResultatContent" Margin="50,10,0,10" Click="PlusResultat_Click" Visibility="{x:Bind ViewModel.DispoPlusResult,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        <TextBlock x:Uid="BibliothequeText" Margin="15,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.DispoMaBibliotheque,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        <GridView ItemsSource="{x:Bind ViewModel.ListeBibliotheque, Mode=OneWay}" Visibility="{x:Bind ViewModel.DispoMaBibliotheque,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" MaxWidth="1000" ItemClick="SelectFilm_Click" IsSwipeEnabled="True" IsItemClickEnabled="True" Margin="10,5,0,5" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding AfficheImage}" Grid.Row="0" Width="100" Height="150"/>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Titre}" Width="100" FontFamily="Cambria" FontSize="9"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <TextBlock x:Uid="FilmsText" Margin="15,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.DispoFilms,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        <GridView ItemsSource="{x:Bind ViewModel.ListeFilm, Mode=OneWay}" Visibility="{x:Bind ViewModel.DispoFilms,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" MaxWidth="1000" ItemClick="SelectFilm_Click" IsSwipeEnabled="True" IsItemClickEnabled="True" Margin="10,5,0,5" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding affiche}" Grid.Row="0" Width="100" Height="150"/>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding title}" Width="100" FontFamily="Cambria" FontSize="9"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <TextBlock x:Uid="SeriesText" Margin="15,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.DispoSeries,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        <GridView ItemsSource="{x:Bind ViewModel.ListeSerie, Mode=OneWay}" Visibility="{x:Bind ViewModel.DispoSeries,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" MaxWidth="1000" ItemClick="SelectFilm_Click" IsSwipeEnabled="True" IsItemClickEnabled="True" Margin="10,5,0,5" VerticalAlignment="Top">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding affiche}" Grid.Row="0" Width="100" Height="150"/>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding title}" Width="100" FontFamily="Cambria" FontSize="9"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <TextBlock x:Uid="PersonnesText" Margin="15,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{x:Bind ViewModel.DispoPersonnes,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        <GridView ItemsSource="{x:Bind ViewModel.ListePersonne, Mode=OneWay}" Visibility="{x:Bind ViewModel.DispoPersonnes,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}" MaxWidth="1000" ItemClick="SelectFilm_Click" IsSwipeEnabled="True" IsItemClickEnabled="True" Margin="10,5,0,5" VerticalAlignment="Top">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding affiche}" Grid.Row="0" Width="100" Height="150"/>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding name}" Width="100" FontFamily="Cambria" FontSize="9"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+     </Grid>
+</Page>

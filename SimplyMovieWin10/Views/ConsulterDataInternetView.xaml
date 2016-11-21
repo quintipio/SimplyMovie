@@ -1,0 +1,543 @@
+﻿<Page
+    x:Class="SimplyMovieWin10.Views.ConsulterDataInternetView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimplyMovieWin10.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:SimplyMovieWin10.Converter"
+    xmlns:ratingControl="using:JISoft.RatingControl"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converter:BoolVisibilityConverter x:Key="BoolVisibiltyConverter"/>
+        <converter:BoolVisibilityInvertConverter x:Key="BoolVisibiltyInvertConverter"/>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid Background="#FFE8E8E8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitreGrid" Grid.Row="0" Background="Black">
+                <TextBlock Text="{x:Bind ViewModel.Titre,Mode=OneWay}"  FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="WhiteSmoke"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.Background>
+                    <ImageBrush ImageSource="ms-appx:///Rsc/icon.png" Stretch="None" Opacity="0.15" />
+                </Grid.Background>
+
+                <Grid x:Name="GridWait">
+                    <ProgressRing x:Name="WaitRing"/>
+                </Grid>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" x:Name="GridData" >
+                    <Grid Margin="10,10,0,0">
+                    <RelativePanel Visibility="{x:Bind ViewModel.FilmVisible,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}">
+                        <Grid x:Name="GridAffiche" >
+                            <Image Source="{x:Bind ViewModel.DataToDisplay.Affiche, Mode=OneWay}" Width="100" Height="200"/>
+                        </Grid>
+
+                        <Grid x:Name="MainInfo" RelativePanel.RightOf="GridAffiche" Margin="10,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                <TextBlock x:Uid="DateSortieText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Film.release_date,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock x:Uid="TitreOriginalText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Film.original_title,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                <TextBlock x:Uid="DureeText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Film.runtime,Mode=OneWay}"/>
+                            </StackPanel>
+
+                            <ListView Grid.Row="3" ItemsSource="{x:Bind ViewModel.DataToDisplay.Film.genres, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name,Mode=OneWay}" Margin="0,0,4,0"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="4" >
+                                <TextBlock x:Uid="NoteDuFilmText" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                    <ratingControl:Rating HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" AllowSelectingZero="True" RatingItemCount="5" Value="{x:Bind ViewModel.DataToDisplay.Film.vote_average,Mode=OneWay}" ReadOnly="True">
+
+                                    <ratingControl:Rating.FilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Goldenrod"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.FilledItemStyle>
+                                    <ratingControl:Rating.UnfilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.UnfilledItemStyle>
+                                </ratingControl:Rating>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid x:Name="GridAjouterFilm" RelativePanel.Below="GridAffiche">
+                            <Button Grid.Row="0" x:Uid="AjouterFilmBiblioContent" HorizontalAlignment="Center" Click="AjouterFilm_Click" Margin="10" Visibility="{x:Bind ViewModel.ElementPresent,Mode= OneWay,Converter={StaticResource BoolVisibiltyInvertConverter}}"/>
+                            <Button Grid.Row="0" x:Uid="ConsulterBiblioContent" HorizontalAlignment="Center" Click="ConsulterBiblio_Click" Margin="10" Visibility="{x:Bind ViewModel.ElementPresent,Mode= OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        </Grid>
+
+                        <Grid x:Name="GridSynopsis" RelativePanel.Below="GridAjouterFilm">
+                            <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Film.overview,Mode=OneWay}" MaxWidth="350" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </Grid>
+
+                            <StackPanel x:Name="GridFilmsCollection" RelativePanel.Below="GridSynopsis">
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Collection.name,Mode=OneWay}"  Margin="8,0,0,0" FontWeight="Bold"/>
+                                <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.Collection.parts,Mode=OneWay}" ItemClick="OpenCollectionMovie_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Image Grid.Row="0" Width="100" Height="150" Source="{Binding affiche,Mode=OneWay}"/>
+                                                <TextBlock Grid.Row="1" Text="{Binding title,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            </StackPanel>
+
+                            <StackPanel x:Name="GridCast" RelativePanel.Below="GridFilmsCollection">
+                            <TextBlock x:Uid="CastText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.Casting.cast,Mode=OneWay}" ItemClick="OpenCast_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" Text="{Binding character,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                            <Image Grid.Row="1" Source="{Binding affiche}" Width="100" Height="150"  />
+                                            <TextBlock Grid.Row="2" Text="{Binding name,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+
+                        <StackPanel x:Name="GridCrew" RelativePanel.Below="GridCast" Margin="0,10,0,0">
+                            <TextBlock x:Uid="CrewText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.Casting.crew,Mode=OneWay}" ItemClick="OpenCrew_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" Text="{Binding job,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                            <Image Grid.Row="1" Width="100" Height="150" Source="{Binding affiche}"/>
+                                            <TextBlock Grid.Row="2" Text="{Binding name,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+
+
+
+                            <StackPanel x:Name="GridFilmSimilaire" RelativePanel.Below="GridCrew">
+                            <TextBlock x:Uid="FilmSimilaireText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.SimilarMovie,Mode=OneWay}" ItemClick="OpenSimilarMovie_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0" Width="100" Height="150" Source="{Binding affiche,Mode=OneWay}"/>
+                                            <TextBlock Grid.Row="1" Text="{Binding title,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+                    </RelativePanel>
+
+                    <RelativePanel Visibility="{x:Bind ViewModel.SerieVisible,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}">
+                        <Grid x:Name="GridAfficheSerie" >
+                            <Image Source="{x:Bind ViewModel.DataToDisplay.Affiche, Mode=OneWay}" Width="100" Height="200"/>
+                        </Grid>
+
+                        <Grid x:Name="MainInfoSerie" RelativePanel.RightOf="GridAfficheSerie" Margin="10,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                <TextBlock x:Uid="DateSortieText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Tv.first_air_date,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock x:Uid="TitreOriginalText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Tv.original_name,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                <TextBlock x:Uid="NombreSaisonText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Tv.number_of_seasons,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                                <TextBlock x:Uid="NombreEpisodeText" Margin="0,0,5,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Tv.number_of_episodes,Mode=OneWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                                <TextBlock x:Uid="DureeText" Margin="0,0,5,0"/>
+                                <ListView Grid.Row="6" ItemsSource="{x:Bind ViewModel.DataToDisplay.Tv.episode_run_time, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                            <Setter Property="VerticalAlignment" Value="Top" />
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" Margin="0,0,4,0"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+
+                            <ListView Grid.Row="5" ItemsSource="{x:Bind ViewModel.DataToDisplay.Tv.genres, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name,Mode=OneWay}" Margin="0,0,4,0"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <ListView Grid.Row="6" ItemsSource="{x:Bind ViewModel.DataToDisplay.Tv.created_by, Mode=OneWay}" SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Background="Transparent" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name,Mode=OneWay}" Margin="0,0,4,0"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="7" >
+                                <TextBlock x:Uid="NoteDuFilmText" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                    <ratingControl:Rating HorizontalAlignment="Left" Background="Transparent" VerticalAlignment="Center" AllowSelectingZero="True" RatingItemCount="5" Value="{x:Bind ViewModel.DataToDisplay.Tv.vote_average,Mode=OneWay}" ReadOnly="True">
+
+                                    <ratingControl:Rating.FilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Goldenrod"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.FilledItemStyle>
+                                    <ratingControl:Rating.UnfilledItemStyle>
+                                        <Style TargetType="ratingControl:RatingItem">
+                                            <Setter Property="Background" Value="Black"/>
+                                            <Setter Property="Width" Value="13"/>
+                                            <Setter Property="Height" Value="13"/>
+                                        </Style>
+                                    </ratingControl:Rating.UnfilledItemStyle>
+                                </ratingControl:Rating>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid x:Name="GridAjouterSerie" RelativePanel.Below="MainInfoSerie">
+                            <Button Grid.Row="0" x:Uid="AjouterSerieBiblioContent" HorizontalAlignment="Center" Click="AjouterSerie_Click" Margin="10" Visibility="{x:Bind ViewModel.ElementPresent,Mode= OneWay,Converter={StaticResource BoolVisibiltyInvertConverter}}"/>
+                            <Button Grid.Row="0" x:Uid="ConsulterBiblioContent" HorizontalAlignment="Center" Click="ConsulterBiblio_Click" Margin="10" Visibility="{x:Bind ViewModel.ElementPresent,Mode= OneWay,Converter={StaticResource BoolVisibiltyConverter}}"/>
+                        </Grid>
+
+                        <Grid x:Name="GridSynopsisSerie" RelativePanel.Below="GridAjouterSerie">
+                            <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Tv.overview,Mode=OneWay}" MaxWidth="350" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </Grid>
+
+                            <Grid x:Name="GridSaisons" RelativePanel.Below="GridSynopsisSerie" Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Uid="SaisonText" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                <GridView ItemsSource="{x:Bind ViewModel.ListeSaison,Mode=OneWay}" Grid.Row="1" Grid.Column="0" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Content="{Binding}" Tag="{Binding}" Click="ChoisirSaison_Click" Height="50" Margin="10" Width="50"/>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                                
+                                <StackPanel Grid.Row="2" Grid.Column="0" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock Text="{x:Bind ViewModel.Season.overview,Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{x:Bind ViewModel.Season.air_date,Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                    <TextBlock x:Uid="EpisodeText"/>
+                                    <GridView ItemsSource="{x:Bind ViewModel.Season.episodes,Mode=OneWay}" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Content="{Binding episode_number,Mode=OneWay}" Tag="{Binding}" Click="ChoisirEpisode_Click" Height="50" Margin="5" Width="50"/>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Grid.Column="1" Width="400">
+                                    <TextBlock Text="{x:Bind ViewModel.Episode.name,Mode=OneWay}" Margin="0,3,0,5" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{x:Bind ViewModel.Episode.overview,Mode=OneWay}" TextWrapping="Wrap"/>
+
+                                    <ListView ItemsSource="{x:Bind ViewModel.Episode.guest_stars,Mode=OneWay}" SelectionMode="None" >
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                                <Setter Property="VerticalAlignment" Value="Top" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding name}"/>
+                                                    <TextBlock Text=" - "/>
+                                                    <TextBlock Text="{Binding character}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
+                            </Grid>
+
+
+                            <StackPanel x:Name="GridCastSerie" RelativePanel.Below="GridSaisons">
+                            <TextBlock x:Uid="CastText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.Casting.cast,Mode=OneWay}" ItemClick="OpenCast_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" Text="{Binding character,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                            <Image Grid.Row="1" Source="{Binding affiche}" Width="100" Height="150"  />
+                                            <TextBlock Grid.Row="2" Text="{Binding name,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+
+
+
+                            <StackPanel x:Name="GridCrewSerie" RelativePanel.Below="GridCastSerie" Margin="0,10,0,0">
+                                <TextBlock x:Uid="CrewText" Margin="8,0,0,0" FontWeight="Bold"/>
+                                <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.Casting.crew,Mode=OneWay}" ItemClick="OpenCrew_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <TextBlock Grid.Row="0" Text="{Binding job,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                                <Image Grid.Row="1" Width="100" Height="150" Source="{Binding affiche}"/>
+                                                <TextBlock Grid.Row="2" Text="{Binding name,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            </StackPanel>
+
+                            <StackPanel x:Name="GridSerieSimilaire" RelativePanel.Below="GridCrewSerie">
+                            <TextBlock x:Uid="FilmSimilaireText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <GridView MaxWidth="500" ItemsSource="{x:Bind ViewModel.DataToDisplay.SimilarTv,Mode=OneWay}" ItemClick="OpenSimilarSerie_Click" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0" Width="100" Height="150" Source="{Binding affiche,Mode=OneWay}"/>
+                                            <TextBlock Grid.Row="1" Text="{Binding name,Mode=OneWay}" Width="100" FontFamily="Cambria" FontSize="9" TextWrapping="Wrap"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+
+                    </RelativePanel>
+
+                    <RelativePanel Visibility="{x:Bind ViewModel.PersonVisible,Mode=OneWay,Converter={StaticResource BoolVisibiltyConverter}}">
+
+                        <Grid x:Name="GridTopPerson">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="{x:Bind ViewModel.DataToDisplay.Affiche, Mode=OneWay}" Width="100" Height="200"/>
+
+                            <Grid Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <TextBlock x:Uid="DatesText" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Person.birthday,Mode=OneWay}" Margin="5,0,0,0"/>
+                                    <TextBlock Text=" - " Margin="5,0"/>
+                                    <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Person.deathday,Mode=OneWay}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                    <TextBlock x:Uid="LieuNaissanceText" Margin="5,0"/>
+                                    <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Person.place_of_birth,Mode=OneWay}"/>
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+
+
+                        <Grid x:Name="GridSynopsisPerson" RelativePanel.Below="GridTopPerson">
+                            <TextBlock Text="{x:Bind ViewModel.DataToDisplay.Person.biography,Mode=OneWay}" MaxWidth="350" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="5,10,0,0" />
+                        </Grid>
+
+
+                        <StackPanel x:Name="GridCrewPerson" RelativePanel.Below="GridSynopsisPerson" Margin="0,10,0,0">
+                            <TextBlock x:Uid="EquipeTechniqueText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <ListView ItemsSource="{x:Bind ViewModel.DataToDisplay.CreditPerson.crew,Mode=OneWay}" ItemClick="OpenMovie_PersonCrew" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding title,Mode=OneWay}" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="1" Text="{Binding release_date,Mode=OneWay}" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="2" Text="{Binding job,Mode=OneWay}" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+
+                        <StackPanel x:Name="GridCastPerson" RelativePanel.RightOf="GridCrewPerson" RelativePanel.AlignTopWith="GridCrewPerson" Margin="0,10,0,0">
+                            <TextBlock x:Uid="ActeurText" Margin="8,0,0,0" FontWeight="Bold"/>
+                            <ListView ItemsSource="{x:Bind ViewModel.DataToDisplay.CreditPerson.cast,Mode=OneWay}" ItemClick="OpenMovie_PersonCast" SelectionMode="None" IsSwipeEnabled="false" IsItemClickEnabled="True" Margin="8,7,0,15">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding title,Mode=OneWay}" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding release_date,Mode=OneWay}" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="2" Text="{Binding character,Mode=OneWay}" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </RelativePanel>
+                </Grid>
+
+            </ScrollViewer>
+           </Grid>
+        </Grid>
+    </Grid>
+</Page>
